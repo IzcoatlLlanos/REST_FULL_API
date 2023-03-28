@@ -1,0 +1,39 @@
+@api = http://localhost:3020/api/v1/Periodos-API
+### GET
+GET {{api}}
+### GET ITEM
+GET {{api}}/2
+//Toma la clave de OK por default
+### GET ITEM
+GET {{api}}/2012?keyType=OK
+### DELETE ITEM
+DELETE {{api}}/2013
+
+//Education
+### POST ITEM EDIFICIO
+POST {{api}}
+Content-Type: application/json
+
+{
+    "IdPeriodoPK" : "3",
+    "IdPeriodoOK" : "2012",
+    "IdPeriodoBK" : "20215",
+    "IdInstitutoOK" : "2",
+    "DesPeriodo" : "Periodo Agosto - Diciembre de 2022",
+    "NombreCorto" : "AGO-DIC 2022"
+}
+
+
+### PUT ITEM EDIFICIO
+PUT {{api}}/2
+Content-Type: application/json 
+
+{ 
+    "IdPeriodoPK":"3",
+    "IdPeriodoOK":"2013",
+    "IdPeriodoBK": "20216",
+    "IdInstitutoOK": "1",
+    "DesPeriodo": "Periodo Febrero - Junio de 2023",
+    "NombreCorto": "FEB-JUN 2023"
+}
+

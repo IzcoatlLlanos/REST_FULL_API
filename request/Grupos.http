@@ -1,0 +1,5 @@
+@api = http://localhost:3020/api/v1/Grupos-API
+### GET
+GET {{api}}
+### GET ITEM
+GET {{api}}/4

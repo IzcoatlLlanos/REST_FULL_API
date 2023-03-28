@@ -1,0 +1,35 @@
+@api = http://localhost:3020/api/v1/Edificios-API
+### GET
+GET {{api}}
+### GET ITEM
+GET {{api}}/18DIT0005Z
+### GET ITEM
+GET {{api}}/18DIT0005Z?keyType=OK
+###DELETE 
+DELETE {{api}}/XXXXXX
+//Education
+### POST ITEM EDIFICIO
+POST {{api}} 
+Content-Type: application/json
+
+{
+    "IdEdificioPK" : "5",
+    "IdEdificioOK" : "18401145",
+    "IdEdificioBK" : "LABMovA",
+    "IdIstituto" : "1",
+    "desEdificio" : "Laboratorio de computo movil A",
+    "Alias" : "MovA"
+}
+### PUT ITEM EDIFICIO
+PUT {{api}}/18401145
+Content-Type: application/json 
+
+{ 
+        "IdEdificioPK" : "4", 
+        "IdEdificioOK" : "XXXXXX", 
+        "IdEdificioBK" : "Instituto Tecnológico de XXXXX", 
+        "IdIstituto" : "X", 
+        "desEdificio" : "EducacionXXX", 
+        "Alias" : "ITTXXX"
+}
+
