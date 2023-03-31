@@ -14,9 +14,10 @@ export const getEtiquetasList = async (req, res, next) => {
 
 export const getEtiquetasItem = async (req, res, next) => {
     const { id } = req.params;
+    const keyType = req.keyType || 'ID';
     let etiquetaItem;
     try {
-        etiquetaItem = await etiquetasService.getEtiquetasItem(id);
+        etiquetaItem = await etiquetasService.getEtiquetasItem(id, keyType);
         if (!etiquetaItem) throw boom.notFound('No se encontro la etiqueta');
         else if (etiquetaItem) res.status(200).json(etiquetaItem);
     } catch (error) {
@@ -36,11 +37,23 @@ export const postEtiquetasItem = async (req, res, next) => {
 };
 
 export const deleteEtiquetasItem = async (req, res, next) => {
-    const { id } = req.params;
     try {
+        const { id } = req.params;
         const deletedEtiquetaItem = await etiquetasService.deleteEtiquetasItem(id);
-        if (!deleteEtiquetasItem) throw boom.notFound('No se encontro la etiqueta');
-        else if (deleteEtiquetasItem) res.status(200).json(deleteEtiquetasItem);
+        if (!deletedEtiquetaItem) throw boom.notFound('No se encontro la etiqueta');
+        else if (deletedEtiquetaItem) res.status(200).json(deletedEtiquetaItem);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const putEtiquetasItem = async (req, res, next) => {
+    const { id } = req.params;
+    const paEtiquetasItem = req.body;
+    try {
+        const updatedEtiqueta = await etiquetasService.putEtiquetaItem(id, paEtiquetasItem);
+        if(!updatedEtiqueta) throw boom.notFound('No se encontro la etiqueta');
+        else if(updatedEtiqueta) res.status(200).json(updatedEtiqueta);
     } catch (error) {
         next(error);
     }

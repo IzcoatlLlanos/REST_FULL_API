@@ -4,11 +4,12 @@ const etiquetaSchema = mongoose.Schema({
     IdInstitutoOK: {type: String, required: true},
     IdEtiquetaOK: {type: String},
     Etiqueta: {type: String},
-    Indicen: {type: String},
+    Indice: {type: String},
     Coleccion: {type: String},
     Seccion: {type: String},
     Secuencia: {type: String},
     valores: [{
+        _id: false,
         IdValorPA: {type: String},
         IdValorOK: {type: String},
         Valor: {type: String},

@@ -2,18 +2,18 @@
 ###
 GET {{api}}
 ###
-GET {{api}}/jaime
+GET {{api}}/llanos
+### ID - ET
+GET {{api}}/llanos?keyType=ET
 ###
-GET {{api}}/llanos?keyType=OK
-###
-DELETE {{api}}/jaime
+DELETE {{api}}/llanos
 ### Post Etiqueta
 POST {{api}}
 Content-Type: application/json 
 
 { 
    "IdInstitutoOK" : "1",
-   "IdEtiquetaOK" : "jaime",
+   "IdEtiquetaOK" : "llanos",
    "Etiqueta" : "GPS",
    "Indice" : "subcategoria, laptops, accesorio, audio, ropa",
    "Coleccion" : "CatProdServ",
