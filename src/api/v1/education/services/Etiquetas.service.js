@@ -9,10 +9,9 @@ export const getEtiquetasList = async() => {
     }
 };
 
-export const getEtiquetasItem = async (id, keyType) => {
+export const getEtiquetasItem = async (id) => {
     try {
-        if (keyType=='OK') return await EtiquetasModel.findOne({IdEtiquetaOK: id});
-        else if (keyType=='BK') return await EtiquetasModel.findOne({IdEtiquetaBK: id});
+        return await EtiquetasModel.findOne({IdEtiquetaOK: id});
     } catch (error) {
         throw boom.internal(error);
     }
@@ -20,8 +19,16 @@ export const getEtiquetasItem = async (id, keyType) => {
 
 export const postEtiquetasItem = async (etiquetasItem) => {
     try {
-        const paEtiquetaItem = EtiquetasModel(etiquetasItem);
-        return await paEtiquetaItem.new();
+        const paEtiquetaItem = new EtiquetasModel(etiquetasItem);
+        return await paEtiquetaItem.save();
+    } catch (error) {
+        throw boom.internal(error);
+    }
+};
+
+export const deleteEtiquetasItem = async (id) => {
+    try {
+        return await EtiquetasModel.findByIdAndDelete({IdEtiquetaOK: id});
     } catch (error) {
         throw boom.internal(error);
     }

@@ -1,0 +1,30 @@
+@api = http://localhost:3020/api/v1/Etiquetas-API
+###
+GET {{api}}
+###
+GET {{api}}/jaime
+###
+GET {{api}}/llanos?keyType=OK
+###
+DELETE {{api}}/jaime
+### Post Etiqueta
+POST {{api}}
+Content-Type: application/json 
+
+{ 
+   "IdInstitutoOK" : "1",
+   "IdEtiquetaOK" : "jaime",
+   "Etiqueta" : "GPS",
+   "Indice" : "subcategoria, laptops, accesorio, audio, ropa",
+   "Coleccion" : "CatProdServ",
+   "Seccion" : "Principal",
+   "Secuencia" : 10,
+   "valores":[{
+         "IdValorPA":"IDCATEGO-IDTECNO",
+         "IdValorOK":"IDLAPTOP",
+         "Valor":"Laptops",
+         "Imagen":"https://"
+      }]
+}
+
+ 
