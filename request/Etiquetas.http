@@ -2,9 +2,12 @@
 ###
 GET {{api}}
 ###
-GET {{api}}/llanos
-### ID - ET
-GET {{api}}/llanos?keyType=ET
+GET {{api}}/Mariana
+### ID = Lo busca por el "IdEtiquetaOK" - ET = Lo busca por el valor de "Etiqueta"
+GET {{api}}/GPS?keyType=ET
+### GET VALOR OK -> IdValorOK PA -> IdValorPA VA -> Valor
+GET {{api}}/valor/IDSUBCATEGO/IDLAPTOP
+
 ###
 DELETE {{api}}/llanos
 ### Post Etiqueta
@@ -27,4 +30,36 @@ Content-Type: application/json
       }]
 }
 
- 
+### PUT Etiqueta
+PUT {{api}}/llanos
+Content-Type: application/json 
+
+{ 
+   "IdInstitutoOK" : "1",
+   "IdEtiquetaOK" : "Mariana",
+   "Etiqueta" : "GPS",
+   "Indice" : "subcategoria, laptops, accesorio, audio, ropa",
+   "Coleccion" : "CatProdServ",
+   "Seccion" : "Principal",
+   "Secuencia" : 10,
+   "valores":[{
+         "IdValorPA":"IDCATEGO-IDTECNO",
+         "IdValorOK":"IDLAPTOP",
+         "Valor":"Laptops",
+         "Imagen":"https://"
+      }]
+}
+
+### PUT Etiqueta-valor
+PUT {{api}}/valor/IDSUBCATEGO/IDLAPTOP
+Content-Type: application/json 
+
+{
+      "IdValorPA":"",
+      "IdValorOK":"IDLAPTOP",
+      "Valor":"Iphones 20",
+      "Imagen":"https://Celphones"  
+}
+
+###Delete valor
+DELETE {{api}}/valor/IDSUBCATEGO/IDLAPTOP

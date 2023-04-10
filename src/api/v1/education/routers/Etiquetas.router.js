@@ -9,4 +9,8 @@ router.post('/', etiquetasController.postEtiquetasItem);
 router.delete('/:id', etiquetasController.deleteEtiquetasItem);
 router.put('/:id', etiquetasController.putEtiquetasItem);
 
+router.get('/valor/:idEtiqueta/:idValor', etiquetasController.getValoresItem);
+router.put('/valor/:idEtiqueta/:idValor', etiquetasController.pushValor);
+router.put('/valor/:idEtiqueta/:idValor', etiquetasController.deleteValor);
+
 export default router;
