@@ -11,6 +11,6 @@ router.put('/:id', etiquetasController.putEtiquetasItem);
 
 router.get('/valor/:idEtiqueta/:idValor', etiquetasController.getValoresItem);
 router.put('/valor/:idEtiqueta/:idValor', etiquetasController.pushValor);
-router.put('/valor/:idEtiqueta/:idValor', etiquetasController.deleteValor);
+router.put('/valor/delete/:idEtiqueta/:idValor', etiquetasController.deleteValor);
 
 export default router;

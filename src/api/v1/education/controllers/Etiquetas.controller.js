@@ -5,8 +5,8 @@ export const getEtiquetasList = async (req, res, next) => {
     let etiquetasList;
     try {
         etiquetasList = await etiquetasService.getEtiquetasList();
-        if (!etiquetasList) throw boom.notFound('No se encontraron etiquetas registradas');
-        else if (etiquetasList) res.status(200).json(etiquetasList);
+        if (!etiquetasList.success) throw boom.notFound(etiquetasList.error);
+        else if (etiquetasList.success) res.status(200).json(etiquetasList);
     } catch (error) {
         next(error);
     }
@@ -18,8 +18,8 @@ export const getEtiquetasItem = async (req, res, next) => {
     let etiquetaItem;
     try {
         etiquetaItem = await etiquetasService.getEtiquetasItem(id, keyType);
-        if (!etiquetaItem) throw boom.notFound('No se encontro la etiqueta');
-        else if (etiquetaItem) res.status(200).json(etiquetaItem);
+        if (!etiquetaItem.success) throw boom.notFound(etiquetaItem.error);
+        else if (etiquetaItem.success) res.status(200).json(etiquetaItem);
     } catch (error) {
        next(error); 
     }
@@ -29,8 +29,8 @@ export const postEtiquetasItem = async (req, res, next) => {
     try {
         const paEtiquetaItem = req.body;
         const newEtiquetaItem = await etiquetasService.postEtiquetasItem(paEtiquetaItem);
-        if (!newEtiquetaItem) throw boom.badRequest('No se pudo insertar el dato');
-        else if (newEtiquetaItem) res.status(201).json(newEtiquetaItem);
+        if (!newEtiquetaItem.success) throw boom.badRequest(newEtiquetaItem.error);
+        else if (newEtiquetaItem.success) res.status(201).json(newEtiquetaItem);
     } catch (error) {
         next(error);
     }
@@ -40,8 +40,8 @@ export const deleteEtiquetasItem = async (req, res, next) => {
     try {
         const { id } = req.params;
         const deletedEtiquetaItem = await etiquetasService.deleteEtiquetasItem(id);
-        if (!deletedEtiquetaItem) throw boom.notFound('No se encontro la etiqueta');
-        else if (deletedEtiquetaItem) res.status(200).json(deletedEtiquetaItem);
+        if (!deletedEtiquetaItem.success) throw boom.notFound(deletedEtiquetaItem.error);
+        else if (deletedEtiquetaItem.success) res.status(200).json(deletedEtiquetaItem);
     } catch (error) {
         next(error);
     }
@@ -52,8 +52,8 @@ export const putEtiquetasItem = async (req, res, next) => {
     const paEtiquetasItem = req.body;
     try {
         const updatedEtiqueta = await etiquetasService.putEtiquetaItem(id, paEtiquetasItem);
-        if(!updatedEtiqueta) throw boom.notFound('No se encontro la etiqueta');
-        else if(updatedEtiqueta) res.status(200).json(updatedEtiqueta);
+        if(!updatedEtiqueta.success) throw boom.notFound(updatedEtiqueta.error);
+        else if(updatedEtiqueta.success) res.status(200).json(updatedEtiqueta);
     } catch (error) {
         next(error);
     }
@@ -67,8 +67,8 @@ export const getValoresItem = async (req, res, next) => {
         const valoresItem = await etiquetasService.getValoresItem(
             idEtiqueta,idValor
         );
-        if(!valoresItem.succes) throw boom.notFound(valoresItem.error);
-        else res.status(200).json(valoresItem);
+        if (!valoresItem.success) throw boom.notFound(valoresItem.error);
+        else if (valoresItem.success) res.status(200).json(valoresItem);
     } catch (error) {
         next(error);
     }
@@ -84,7 +84,7 @@ export const pushValor = async (req, res, next) => {
         if (!etiquetaValorUpdated.success) {
             throw boom.notFound(etiquetaValorUpdated.error);
         }
-        else if (etiquetaValorUpdated.succes) {
+        else if (etiquetaValorUpdated.success) {
             res.status(200).json(etiquetaValorUpdated);
         } 
     } catch (error) {
@@ -94,7 +94,7 @@ export const pushValor = async (req, res, next) => {
 
 export const deleteValor = async (req, res, next) => {
     try {
-        const {idEtiqueta, idValor} = req.params;
+        const { idEtiqueta, idValor } = req.params;
 
         const etiquetaValorUpdated = await etiquetasService.deleteValor(
             idEtiqueta,idValor
@@ -102,7 +102,7 @@ export const deleteValor = async (req, res, next) => {
         if (!etiquetaValorUpdated.success) {
             throw boom.notFound(etiquetaValorUpdated.error);
         }
-        else if (etiquetaValorUpdated.succes) {
+        else if (etiquetaValorUpdated.success) {
             res.status(200).json(etiquetaValorUpdated);
         } 
     } catch (error) {

@@ -3,44 +3,50 @@ import boom from "@hapi/boom";
 
 export const getEtiquetasList = async() => {
     try {
-        return await EtiquetasModel.find();
+        const etiquetasList = await EtiquetasModel.find();
+        return {success: true, etiquetasList};
     } catch (error) {
-        throw boom.internal(error);
+        return {success: false, error};
     }
 };
 
 export const getEtiquetasItem = async (id, keyType) => {
-    try {
-        if(keyType=='ID')return await EtiquetasModel.findOne({IdEtiquetaOK: id});
-        else if(keyType=='ET')return await EtiquetasModel.findOne({Etiqueta: id});
+    try { 
+        let etiquetaItem;
+        if(keyType=='ID') etiquetaItem = await EtiquetasModel.findOne({IdEtiquetaOK: id});
+        else if(keyType=='ET') etiquetaItem = await EtiquetasModel.findOne({Etiqueta: id});
+        return {success: true, etiquetaItem};
     } catch (error) {
-        throw boom.internal(error);
+        return {success: false, error};
     }
 };
 
 export const postEtiquetasItem = async (etiquetasItem) => {
     try {
         const paEtiquetaItem = new EtiquetasModel(etiquetasItem);
-        return await paEtiquetaItem.save();
+        await paEtiquetaItem.save();
+        return {success: true, paEtiquetaItem};
     } catch (error) {
-        throw boom.internal(error);
+        return {success: false, error};
     }
 };
 
 export const deleteEtiquetasItem = async (id) => {
     try {
-        return await EtiquetasModel.findOneAndDelete({IdEtiquetaOK: id});
+        const etiquetaToDelete = await EtiquetasModel.findOneAndDelete({IdEtiquetaOK: id});
+        return {success: true, etiquetaToDelete};
     } catch (error) {
-        throw boom.badImplementation(error);
+        return {success: false, error};
     }
 };
 
 
 export const putEtiquetaItem = async (id, etiquetaItem) => {
     try {
-        return await EtiquetasModel.findOneAndUpdate({IdEtiquetaOK: id}, etiquetaItem, {new: true,});
+        const etiquetaToUpdate = await EtiquetasModel.findOneAndUpdate({IdEtiquetaOK: id}, etiquetaItem, {new: true,});
+        return {success: true, etiquetaToUpdate};
     } catch (error) {
-        throw boom.badImplementation(error);
+        return {success: false, error};
     }
 };
 
@@ -59,7 +65,7 @@ export const getValoresItem = async (idEtiqueta, idValor) => {
         );
 
         const valoresItem = index>=0?valores[index]:undefined;
-        return {succes: index>=0,valoresItem};
+        return {success: index>=0,valoresItem};
     } catch (error) {
         return {success:false, error};
     }
@@ -86,13 +92,16 @@ export const pushValor = async (idEtiqueta, idValor, infoValor) => {
             { $set: { valores } },
             { new: true }
         );
-        return {succes: true, valorUpdated};
+        return {success: true, valorUpdated};
     } catch (error) {
         return {success:false, error};
     }
 };
 
 export const deleteValor = async (idEtiqueta, idValor) => {
+    
+    try {
+
     const etiqueta = await EtiquetasModel.findOne({
         IdEtiquetaOK: idEtiqueta
     });
@@ -102,17 +111,17 @@ export const deleteValor = async (idEtiqueta, idValor) => {
         (valor) => valor.IdValorOK == idValor
     );
     if (index >= 0) {
-        valores.spliece(index,1);
+        valores.splice(index,1);
     }
 
-    try {
-        const etiquetaValorUpdated = await EdificiosModel.findOneAndUpdate(
+    
+        const etiquetaValorUpdated = await EtiquetasModel.findOneAndUpdate(
             { IdEtiquetaOK: idEtiqueta },
             { $set: { valores } },
             { new: true }
         );
-        return { succes: true, etiquetaValorUpdated };
+        return { success: true, etiquetaValorUpdated };
     } catch (error) {
-        return { succes: false, error };
+        return { success: false, error };
     }
 };
